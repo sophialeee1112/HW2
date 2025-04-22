@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>咖啡屋</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f5f3f0] text-[#3c2f2f] font-sans">
+  <header class="text-center py-10">
+    <h1 class="text-4xl font-serif tracking-wide">每天早上最神聖的事情</h1>
+    <p class="text-lg mt-2">上學溜~</p>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- 商品卡片 -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
+      <img src="手沖.jpg" alt="手沖咖啡" class="rounded-lg mb-4 h-48 object-cover" />
+      <h2 class="text-xl font-semibold mb-2">手沖咖啡</h2>
+      <p class="text-sm text-gray-600 mb-4">清爽乾淨，中央直送。</p>
+      <button onclick="addToCart('手沖咖啡', 120)" class="bg-[#5b4636] text-white px-4 py-2 rounded-lg hover:bg-[#3c2f2f]">手刀預訂</button>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
+      <img src="拿鐵.jpg" alt="熱拿鐵" class="rounded-lg mb-4 h-48 object-cover" />
+      <h2 class="text-xl font-semibold mb-2">熱拿鐵</h2>
+      <p class="text-sm text-gray-600 mb-4">適合冬天。</p>
+      <button onclick="addToCart('熱拿鐵', 150)" class="bg-[#5b4636] text-white px-4 py-2 rounded-lg hover:bg-[#3c2f2f]">手刀預訂</button>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
+      <img src="冰磚.jpg" alt="冰磚拿鐵" class="rounded-lg mb-4 h-48 object-cover" />
+      <h2 class="text-xl font-semibold mb-2">冰磚拿鐵</h2>
+      <p class="text-sm text-gray-600 mb-4">適合夏天。</p>
+      <button onclick="addToCart('冰磚拿鐵', 160)" class="bg-[#5b4636] text-white px-4 py-2 rounded-lg hover:bg-[#3c2f2f]">手刀預訂 </button>
+    </div>
+  </main>
+
+  <footer class="text-center text-sm text-gray-500 mt-10 pb-6">
+    &copy; 2025 中大會館 NCU Guest house. All rights reserved.
+  </footer>
+
+  <script>
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${name} 已加入購物車！`);
+    }
+  </script>
+</body>
+</html>
