@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>小李</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(105,84,84,0.346) 60%, rgba(255, 255, 255, 0.192) 100%), url("bg.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .top-bar {
+      background-color: rgba(255, 255, 255, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .top-bar input {
+      padding: 8px 12px;
+      width: 80%;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    #searchSuggestions {
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      display: none;
+      z-index: 1001;
+    }
+
+    #searchSuggestions div {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    #searchSuggestions div:hover {
+      background-color: #f0f0f0;
+    }
+
+    .top-bar button {
+      background-color: #5a4e4e;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .top-bar button:hover {
+      background-color: #443b3b;
+    }
+
+    header {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 70px;
+      font-weight: bold;
+      color: #f4eeee;
+      margin: 0;
+    }
+
+    .category-container {
+      display: flex;
+      justify-content: space-around;
+      margin-left: 60px;
+    }
+
+    .main-category {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-right: 30px;
+    }
+
+    .main-category h2 {
+      font-size: 50px;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .category {
+      margin-bottom: 30px;
+    }
+
+    .category a {
+      display: block;
+      margin-top: 10px;
+      margin-left: 5px;
+      color: #e1dde1;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .category a:hover {
+      text-decoration: underline;
+    }
+
+    .category img {
+      display: none;
+      opacity: 0;
+      transition: opacity 1.8s ease;
+      margin-top: 10px;
+      width: 320px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .category a:hover + img {
+      display: block;
+      opacity: 1;
+    }
+
+    #loginModal, #registerModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: 100px auto;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .modal-content button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+    }
+
+    #memberInfo {
+      font-weight: bold;
+      font-size: 16px;
+      color: #5a4e4e;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div style="flex: 1; position: relative;">
+      <input type="text" id="searchInput" placeholder="搜尋關鍵字..." onkeyup="searchSuggestions()">
+      <div id="searchSuggestions"></div>
+    </div>
+    <div id="loginButtonBox">
+      <button onclick="document.getElementById('loginModal').style.display='block'">會員登入</button>
+    </div>
+    <div id="memberInfo" style="display: none;"></div>
+    <div id="cartButton" style="font-size: 18px; cursor: pointer;" onclick="showCart()">🛒 購物車</div>
+  </div>
+
+  <div id="loginModal">
+    <div class="modal-content">
+      <h2>會員登入</h2>
+      <input type="text" id="phoneInput" placeholder="手機號碼">
+      <input type="password" id="passwordInput" placeholder="密碼">
+      <div id="loginMessage" style="color:red; margin-bottom:10px;"></div>
+      <button onclick="handleLogin()">登入</button>
+      <button onclick="openRegister()">註冊</button>
+      <button onclick="closeModal('loginModal')">取消</button>
+    </div>
+  </div>
+
+  <div id="registerModal">
+    <div class="modal-content">
+      <h2>註冊會員</h2>
+      <input type="text" id="regPhone" placeholder="手機號碼">
+      <input type="text" id="regID" placeholder="學號">
+      <input type="password" id="regPassword" placeholder="密碼">
+      <div id="registerMessage" style="color:red; margin-bottom:10px;"></div>
+      <button onclick="handleRegister()">註冊</button>
+      <button onclick="closeModal('registerModal')">取消</button>
+    </div>
+  </div>
+
+  <header><h1>110409203</h1></header>
+
+  <div class="category-container">
+    <div class="main-category">
+      <h2>▪ 廚房</h2>
+      <div class="category">
+        <a href="chinese.html">中式料理</a>
+        <img src="chinese.png" alt="中式">
+      </div>
+      <div class="category">
+        <a href="western.html">早午餐</a>
+        <img src="western.jpg" alt="早午餐">
+      </div>
+      <div class="category">
+        <a href="hotpot.html">火鍋</a>
+        <img src="hotpot.jpg" alt="火鍋">
+      </div>
+      <div class="category">
+        <a href="korean.html">韓式</a>
+        <img src="korean.jpg" alt="韓式">
+      </div>
+      <div class="category">
+        <a href="vegan.html">蔬食</a>
+        <img src="thai.jpg" alt="蔬食">
+      </div>
+    </div>
+    <div class="main-category">
+      <h2>▪ 咖啡</h2>
+      <div class="category">
+        <a href="coffeebean.html">咖啡豆</a>
+      </div>
+      <div class="category">
+        <a href="cof.html">咖啡</a>
+      </div>
+    </div>
+    <div class="main-category">
+      <h2>▪ 音樂會</h2>
+      <div class="category">
+        <a href="concert.html">最新節目</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="cartModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:3000;">
+    <div style="background:white; padding:30px; max-width:500px; margin:100px auto; border-radius:12px;">
+      <h2>🛒 購物車</h2>
+      <ul id="cartItems" style="font-size:18px; padding-left:20px;"></ul>
+      <button onclick="checkout()">結帳</button>
+      <button onclick="closeCart()">關閉</button>
+    </div>
+  </div>
+
+  <script>
+    const keywords = ["中式料理", "早午餐", "火鍋", "韓式", "蔬食", "咖啡豆", "咖啡", "最新節目", "歷年演出節目"];
+    function searchSuggestions() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const suggestionBox = document.getElementById("searchSuggestions");
+      suggestionBox.innerHTML = "";
+      if (input.trim() === "") {
+        suggestionBox.style.display = "none";
+        return;
+      }
+      const matches = keywords.filter(word => word.toLowerCase().includes(input));
+      if (matches.length > 0) {
+        suggestionBox.style.display = "block";
+        matches.forEach(match => {
+          const div = document.createElement("div");
+          div.textContent = match;
+          div.onclick = () => {
+            document.getElementById("searchInput").value = match;
+            suggestionBox.style.display = "none";
+          };
+          suggestionBox.appendChild(div);
+        });
+      } else {
+        suggestionBox.style.display = "none";
+      }
+    }
+
+    window.onload = function() {
+      const phone = localStorage.getItem("loggedInUser");
+      if (phone) {
+        document.getElementById("loginButtonBox").style.display = "none";
+        const memberInfo = document.getElementById("memberInfo");
+        memberInfo.style.display = "block";
+        memberInfo.innerHTML = `歡迎，${phone} <button onclick="logout()">登出</button>`;
+      }
+    }
+
+    function handleLogin() {
+      const phone = document.getElementById("phoneInput").value.trim();
+      const password = document.getElementById("passwordInput").value.trim();
+      const msg = document.getElementById("loginMessage");
+      const users = JSON.parse(localStorage.getItem("users") || "{}");
+
+      if (users[phone] && users[phone].password === password) {
+        msg.style.color = "green";
+        msg.textContent = "登入成功！";
+        localStorage.setItem("loggedInUser", phone);
+        setTimeout(() => {
+          closeModal("loginModal");
+          showMember(phone);
+        }, 1000);
+      } else {
+        msg.textContent = "帳號或密碼錯誤";
+      }
+    }
+
+    function handleRegister() {
+      const phone = document.getElementById("regPhone").value.trim();
+      const id = document.getElementById("regID").value.trim();
+      const password = document.getElementById("regPassword").value.trim();
+      const msg = document.getElementById("registerMessage");
+
+      if (!/^09\d{8}$/.test(phone)) {
+        msg.textContent = "手機號碼格式錯誤";
+        return;
+      }
+      if (id.length < 4 || password.length < 4) {
+        msg.textContent = "學號與密碼至少 4 碼";
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("users") || "{}");
+      if (users[phone]) {
+        msg.textContent = "此手機號碼已註冊";
+        return;
+      }
+
+      users[phone] = { id, password };
+      localStorage.setItem("users", JSON.stringify(users));
+      msg.style.color = "green";
+      msg.textContent = "註冊成功，請登入";
+      setTimeout(() => {
+        closeModal("registerModal");
+        document.getElementById("loginModal").style.display = "block";
+      }, 1000);
+    }
+
+    function showMember(phone) {
+      document.getElementById("loginButtonBox").style.display = "none";
+      const memberInfo = document.getElementById("memberInfo");
+      memberInfo.style.display = "block";
+      memberInfo.innerHTML = `歡迎，${phone} <button onclick="logout()">登出</button>`;
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      location.reload();
+    }
+
+    function openRegister() {
+      closeModal("loginModal");
+      document.getElementById("registerModal").style.display = "block";
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+      document.querySelectorAll("input").forEach(i => i.value = "");
+      document.querySelectorAll("#loginMessage, #registerMessage").forEach(m => m.textContent = "");
+    }
+
+    function showCart() {
+      const phone = localStorage.getItem("loggedInUser");
+      if (!phone) {
+        alert("請先登入才能查看購物車！");
+        return;
+      }
+
+      const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+      const userCart = cart[phone] || [];
+
+      const cartList = document.getElementById("cartItems");
+      cartList.innerHTML = "";
+
+      if (userCart.length === 0) {
+        cartList.innerHTML = "<li>購物車是空的。</li>";
+      } else {
+        userCart.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} x ${item.quantity}`;
+          cartList.appendChild(li);
+        });
+      }
+
+      document.getElementById("cartModal").style.display = "block";
+    }
+
+    function closeCart() {
+      document.getElementById("cartModal").style.display = "none";
+    }
+
+    function checkout() {
+      const phone = localStorage.getItem("loggedInUser");
+      if (!phone) return;
+
+      const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+      cart[phone] = [];
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("✅ 結帳成功！感謝您的訂購。\n（資料已清空）");
+      closeCart();
+    }
+  </script>
+</body>
+</html>
