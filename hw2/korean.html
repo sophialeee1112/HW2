@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>韓式料理 - 小李廚房</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: relative;
+            height: 250px;
+            background-image: url('中式料理.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255, 255, 255, 0.668));
+        }
+
+        header h1 {
+            position: relative;
+            font-size: 64px;
+            color: #0f0e0e;
+            text-align: center;
+            line-height: 250px;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-top: 30px;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .menu-item {
+            width: 700px;
+            margin: 20px;
+            
+        }
+        .title-img-row {
+           display: flex;
+           justify-content: space-between;
+           align-items: flex-start;
+
+        }
+        .title-img-row h3 {
+           font-size: 26px;
+           color: #ff704d;
+           margin: 0;
+           
+        }
+
+        .title-img-row img {
+           width: 320px;
+           height: 200px;
+           object-fit: cover;
+           border-radius: 10px;
+        }
+
+        .menu-item img {
+            width: 400px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .menu-item h3 {
+            margin-top: 10px;
+            color: #4a1c11;
+            font-size: 30px;
+        }
+
+        .menu-item p {
+            margin-top: 2px;
+            font-size: 18px;
+            
+            color: #555;
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .menu-text {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1></h1>
+    </header>
+    <h2>菜單推薦</h2>
+    <div class="menu-container">
+        <div class="menu-item">
+            <div class="title-img-row">
+                <h3>雅方羊肉爐</h3>
+                <img src="羊肉爐.jpg">
+            </div>
+            <p>滿滿懷舊感</p>
+        </div>
+        
+        <div class="menu-item">
+            <div class="title-img-row">
+                <h3>詹記麻辣鍋</h3>
+                <img src="麻辣鍋.jpg">
+            </div>
+            <p>把台北的名產帶回來</p>
+        </div>
+        
+        
+    </div>
+</body>
+</html>

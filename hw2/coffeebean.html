@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>咖啡豆展示</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body {
+      font-family: 'Noto Serif TC', serif;
+    }
+  </style>
+</head>
+<body class="bg-[#fafafa] text-gray-900">
+
+  <!-- Hero 區塊 -->
+  <section class="h-screen flex flex-col justify-center items-center text-center bg-[url('cb.jpg')] bg-cover bg-center relative">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10">
+      <h1 class="text-5xl md:text-7xl font-serif mb-6 text-white drop-shadow-lg tracking-wider">精心選豆，喝得出來</h1>
+      <button class="px-8 py-3 bg-white text-black rounded-full shadow-lg hover:bg-gray-100 transition-all text-lg">探索風味</button>
+    </div>
+  </section>
+
+  <!-- 處理法區塊 -->
+  <section class="py-24 bg-[#f4f1ec]">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-4xl font-serif mb-16 text-center">處理法介紹</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+
+        <!-- 水洗法 -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition" x-data="{ open: false }">
+          <h3 class="text-2xl font-semibold mb-2">水洗法</h3>
+          <p class="text-gray-600 mb-4">乾淨明亮，酸質突出</p>
+          <button @click="open = !open" class="text-sm text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800">我要訂購</button>
+          <div x-show="open" x-transition class="mt-4">
+            <ul class="space-y-2 mt-2">
+              <li class="flex justify-between items-center">
+                <span>衣索比亞 耶加雪菲 G1</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>肯亞 AA TOP</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>瓜地馬拉 薇薇特南果</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 日曬法 -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition" x-data="{ open: false }">
+          <h3 class="text-2xl font-semibold mb-2">日曬法</h3>
+          <p class="text-gray-600 mb-4">果香濃郁，口感厚實</p>
+          <button @click="open = !open" class="text-sm text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800">我要訂購</button>
+          <div x-show="open" x-transition class="mt-4">
+            <ul class="space-y-2 mt-2">
+              <li class="flex justify-between items-center">
+                <span>衣索比亞 古吉 日曬</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>宏都拉斯 蜜李莊園</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>巴西 曼特耶拉</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 蜜處理 -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition" x-data="{ open: false }">
+          <h3 class="text-2xl font-semibold mb-2">蜜處理</h3>
+          <p class="text-gray-600 mb-4">甜感平衡，香氣宜人</p>
+          <button @click="open = !open" class="text-sm text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800">我要訂購</button>
+          <div x-show="open" x-transition class="mt-4">
+            <ul class="space-y-2 mt-2">
+              <li class="flex justify-between items-center">
+                <span>哥斯大黎加蜜處理</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>薩爾瓦多 聖塔安娜</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>哥倫比亞 花神蜜處理</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">加入購物車</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 風味系列區塊 -->
+  <section class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-4xl font-serif mb-16 text-center">風味主題系列</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+
+        <!-- 音樂家系列 -->
+        <div class="bg-[#f9f9f9] p-6 rounded-2xl shadow hover:shadow-xl transition" x-data="{ open: false }">
+          <h3 class="text-2xl font-semibold mb-2">音樂家系列</h3>
+          <p class="text-gray-600 mb-4">強烈節奏感的酸質，奔放如交響樂章</p>
+          <button @click="open = !open" class="text-sm text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800">我要訂購</button>
+          <div x-show="open" x-transition class="mt-4">
+            <ul class="space-y-2">
+              <li class="flex justify-between items-center">
+                <span>莫札特：耶加雪菲 G1</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>蕭邦：哥斯大黎加蜜處理</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>巴哈：肯亞 AA TOP</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 花香系列 -->
+        <div class="bg-[#f9f9f9] p-6 rounded-2xl shadow hover:shadow-xl transition" x-data="{ open: false }">
+          <h3 class="text-2xl font-semibold mb-2">花香系列</h3>
+          <p class="text-gray-600 mb-4">茉莉、玫瑰、紫羅蘭的輕柔香氣</p>
+          <button @click="open = !open" class="text-sm text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800">我要訂購</button>
+          <div x-show="open" x-transition class="mt-4">
+            <ul class="space-y-2">
+              <li class="flex justify-between items-center">
+                <span>茉莉香：衣索比亞 古吉</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>玫瑰香：哥倫比亞 花神蜜處理</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>紫羅蘭：宏都拉斯 蜜李莊園</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 酒釀系列 -->
+        <div class="bg-[#f9f9f9] p-6 rounded-2xl shadow hover:shadow-xl transition" x-data="{ open: false }">
+          <h3 class="text-2xl font-semibold mb-2">酒釀系列</h3>
+          <p class="text-gray-600 mb-4">帶有熟果與酒香的層次風味</p>
+          <button @click="open = !open" class="text-sm text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800">我要訂購</button>
+          <div x-show="open" x-transition class="mt-4">
+            <ul class="space-y-2">
+              <li class="flex justify-between items-center">
+                <span>紅酒香：巴西 曼特耶拉</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>熟果感：薩爾瓦多 聖塔安娜</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>陳釀風味：瓜地馬拉 薇薇特南果</span>
+                <button class="text-sm px-3 py-1 rounded-full bg-gray-300 hover:bg-gray-400">加入購物車</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>早午餐 - 小李廚房</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(145deg, #f5f2ec, #eae4d7);
+      color: #3b322c;
+      font-family: 'Noto Serif TC', serif;
+    }
+
+    header {
+      position: relative;
+      height: 260px;
+      background-image: url('早午餐背景.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.7));
+    }
+
+    header h1 {
+      position: relative;
+      font-size: 64px;
+      color: #4c3a2f;
+      text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
+      margin: 0;
+      z-index: 1;
+    }
+
+    h2 {
+      text-align: center;
+      color: #3f3126;
+      font-size: 42px;
+      margin-top: 50px;
+      font-family: 'Quicksand', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+
+    .menu-item {
+      width: 360px;
+      text-align: center;
+      padding: 20px 10px;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+    }
+
+    .menu-item h3 {
+      font-size: 28px;
+      color: #7a4c29;
+      margin-bottom: 12px;
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 12px;
+      animation: fadeInImg 1s ease forwards;
+      opacity: 0;
+    }
+
+    .menu-item p {
+      margin-top: 10px;
+      font-size: 17px;
+      color: #4a4036;
+    }
+
+    .order-control {
+      margin-top: 15px;
+    }
+
+    .order-control label {
+      font-size: 17px;
+      margin-right: 8px;
+    }
+
+    .order-control input {
+      width: 50px;
+      text-align: center;
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      background-color: #fdf7ee;
+      color: #2c2c2c;
+    }
+
+    #submit-btn {
+      display: block;
+      margin: 50px auto 70px;
+      font-size: 20px;
+      padding: 14px 40px;
+      background: linear-gradient(to right, #c4905e, #ddb890);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    #submit-btn:hover {
+      background: linear-gradient(to right, #ddb890, #c4905e);
+    }
+
+    @keyframes fadeInImg {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-item {
+        width: 90%;
+      }
+      header h1 {
+        font-size: 48px;
+        line-height: 1.4;
+      }
+      h2 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>早午餐 - 小李廚房</h1>
+  </header>
+
+  <h2>菜單推薦</h2>
+  <form>
+    <div class="menu-container">
+      <div class="menu-item">
+        <h3>雜糧起司小漢堡</h3>
+        <img src="漢堡.jpg" alt="雜糧小漢堡">
+        <p>漢堡很多料 還有自己做的優格</p>
+        <div class="order-control">
+          <label for="item1">數量：</label>
+          <input type="number" id="item1" name="item1" min="0" value="0">
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <h3>簡單的肉包</h3>
+        <img src="包子.jpg" alt="簡單的肉包">
+        <p>麻辣肉包 冰紅茶拿鐵</p>
+        <div class="order-control">
+          <label for="item2">數量：</label>
+          <input type="number" id="item2" name="item2" min="0" value="0">
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <h3>阿嬤地瓜粥</h3>
+        <img src="地瓜粥.jpg" alt="熱騰騰地瓜粥">
+        <p>地瓜粥 筍乾 肉鬆 九層塔蛋 </p>
+        <div class="order-control">
+          <label for="item3">數量：</label>
+          <input type="number" id="item3" name="item3" min="0" value="0">
+        </div>
+      </div>
+    </div>
+
+    <button id="submit-btn" type="submit">確定</button>
+  </form>
+</body>
+</html>
